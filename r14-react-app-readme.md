@@ -1,0 +1,980 @@
+# R14 React App
+Rule14 creates innovative products, using cutting edge technologies. We make things that other people can't. The R14 React App started exactly the way you would expect any Rule14 product does, as a little R&D project. The question was, would it be possible to create a React based rapid development framework, with a single codebase, for multiple platforms? Yes, it is possible. The R14 React App allows developers to quickly build and deploy beautiful, interactive, complex React apps natively to Web, iOS, Android (windows and mac in development) using a single codebase. 
+
+The R14 React App is written using proprietary core libraries integrated with production ready open source projects (GraphQL, React Navigation, React Router, MobX, Expo, etc...). Development and architecture follows many concepts of the MVC, MVP, and observer design patterns. It is designed on the premise that a UI can be created quickly, leveraging the power of Reacts declarative language and a robust set of core R14, application agnostic, components. 
+
+## Table of Contents<!-- omit in toc -->
+
+- [R14 React App](#r14-react-app)
+  - [How does it work?](#how-does-it-work)
+  - [What's Next?](#whats-next)
+  - [Contribute to R14 React App](#contribute-to-r14-react-app)
+  - [Getting Started](#getting-started)
+    - [Tools](#tools)
+    - [Create a Project](#create-a-project)
+    - [Project structure](#project-structure)
+    - [Run your project](#run-your-project)
+      - [Web](#web)
+      - [Native](#native)
+    - [Push your project.](#push-your-project)
+  - [Building an App](#building-an-app)
+  - [Navigation](#navigation)
+    - [Routes and Portals](#routes-and-portals)
+      - [Routes Config](#routes-config)
+    - [Modal Navigators](#modal-navigators)
+    - [Navigating Between Screens](#navigating-between-screens)
+  - [App Context](#app-context)
+  - [Actions](#actions)
+  - [Screens](#screens)
+      - [Screen Component LifeCycle Methods](#screen-component-lifecycle-methods)
+    - [Navigating Between Screens](#navigating-between-screens-1)
+    - [Navigation History](#navigation-history)
+  - [Styling Components](#styling-components)
+    - [StyleSheet Utilities](#stylesheet-utilities)
+    - [Dynamic Styling](#dynamic-styling)
+        - [Cascading styles with props](#cascading-styles-with-props)
+        - [Styling at render](#styling-at-render)
+    - [Responsive Styling](#responsive-styling)
+      - [StyleSheet style screen(size) callback](#stylesheet-style-screensize-callback)
+      - [Dimensions](#dimensions)
+      - [View OnLayout prop](#view-onlayout-prop)
+    - [Sizing and Flex](#sizing-and-flex)
+  - [Animations](#animations)
+    - [Transitions](#transitions)
+  - [Themes](#themes)
+      - [Theme Config](#theme-config)
+    - [Fonts](#fonts)
+    - [Icons](#icons)
+  - [App State](#app-state)
+    - [Domains](#domains)
+  - [Core Components](#core-components)
+    - [Forms](#forms)
+      - [Form UI Domain](#form-ui-domain)
+    - [DataTable](#datatable)
+  - [API / GraphQL](#api--graphql)
+
+## How does it work?
+The R14 App uses both React Native and ReactJs to generate platform specific code based on one codebase. It accomplishes this by transpiling abstracted and normalized core platform libraries into multiple platform specific projects. This is done automatically and in real time. When a developer makes a code change, the app is automatically updated and refreshed on any running platforms, creating a fast, efficient, and fun development experience.
+
+## What's Next?
+Before proceeding with development on a R14 based app, you should be very familiar with React Native. This project is heavily based on React Native, and many of the concepts in this documentation reference it directly. https://facebook.github.io/react-native/docs/getting-started is a great place to start. In fact, you will notice that many of the core technologies used in the R14 App are documented here (Expo, React Navigation, Animated, and so on...).
+
+## Contribute to R14 React App
+We want this to grow like an open source project. We strongly encourage any Rule14 developers to contribute code and their unique skill sets. Whether it's a bug, a new core component, or just edits to this document, your help would be greatly appreciated. 
+
+## Getting Started
+At this time all scripts and tools have been written in linux. Any help to port this to windows and mac would be greatly appreciated. 
+### Tools
+1. VSCode code editor (or any ide with full React and Node integration) https://code.visualstudio.com/
+2. Chrome 
+3. Android Studio or XCode for emulation (and final builds)
+4. Install Git
+5. Install npm.
+
+### Create a Project
+At this time these instructions are for **LINUX** only. If you would like to help convert everything to node and test for different platforms, that would be very helpful.
+
+Using git, clone the r14-react-app from https://github.com/hgmventures/r14-react-app into your workspace.
+```console
+$ git clone https://github.com/hgmventures/r14-react-app r14-react-app
+``` 
+From your workspace (for example, /var/www/html) execute ./r14-react-app/install. You will be asked for a project name, this will become the name of the folder added to your workspace. To develop an existing R14 React App project, add it's git url when prompted.
+
+```console
+$ ./r14-react-app/install
+```
+
+The code for your project will be located in the ./app folder. The ./app folder should be the root of the projects git repository.
+
+### Project structure
+```
+project
+└───app
+│   │
+│   └───actions
+│   └───components
+│   └───config
+│   └───domains
+│   └───screens
+│   
+└───core
+└───platforms
+└───scripts
+
+```
+
+### Run your project
+All the scripts to run your project are in the ./scripts folder of your project. It's usually helpful to run one script per terminal.
+
+The ./watch script will watch for project changes and update the platform builds in real-time. From the ./scripts folder execute watch. **The watch script must be running for the r14 react app to update code changes.**
+From the ./scripts folder execute run-web
+```console
+$ cd ./scripts
+$ ./watch
+``` 
+
+#### Web
+From the ./scripts folder execute run-web.
+```console
+$ cd ./scripts
+$ ./run-web
+``` 
+#### Native
+From the ./scripts folder execute run-native. After expo loads in the browser, follow instructions for either to load your project using either an emulator or your device.
+```console
+$ cd ./scripts
+$ ./run-native
+``` 
+
+
+### Push your project.
+
+If the project is new, and was not cloned from a git repo, first intialize your ./app folder as a git repo.
+
+From the ./scripts folder execute git-push.
+
+```console
+$ cd ./scripts
+$ ./git-push
+``` 
+
+## Building an App
+Now that everything is setup, it's time to start building an app. A R14 React App is made up of fundamental core building blocks based on familiar software patterns. The easiest way to get started coding is to read through the following documentation and try out some of the examples.
+
+## Navigation
+The R14 React App includes an advanced routing and layout system. The navigation base is built on top of and based on https://reactnavigation.org/, so many of the concepts are very similar. Routing is split into navigators. Navigators have their own layout (like a header, tab bar, or modal) and child routes. Each child route is either a navigator, or it is mapped to an Action returning a screen. This allows for complex layouts and routing using only a simple routes config file.
+
+### Routes and Portals
+Routes are uniquely named keys that map to an Action and a path (url for web, deep link for native) or a navigator. The main app contains two main router portals, 'root' and 'modal'. The root route portal contains all the routes that will be displayed on the root layer of the app. The modal route portal displays a modal route dialog above the main root layer. Modal portals can not have a parent navigator.
+
+#### Routes Config
+The routes config file defines all the routes for the application. At this time routes cannot be dynamically defined. It will be automatically included when the R14 app is initialized and should be saved at '/config/routes.config.js'. The root of the route config object must contain an initial route, and the root routes under routes. Each navigator route can contain as many child routes and navigators as needed, allowing for limitless flexibility. Please note that modal navigators are a special instance of navigators and must be placed in the root routes.
+
+```js
+import ProfileActions from '../actions/ProfileActions';
+export default {
+  initialRoute: 'default'
+  routes: {
+    default:  {
+      initialRoute: 'main',
+      type: 'stack',
+      header: {
+        title: 'My R14 App'
+      },
+      routes: {
+        main: {
+          initialRoute: 'profileFeed',
+          type: 'tab',
+          tabNavigator: {
+            position: 'responsive-left-bottom',
+            showIcon: true,
+            showLabel: false
+          },
+          routes: {
+            profile: {
+              icon: 'account',
+              path: '/profile/:uid',
+              actions: ProfileActions,
+            },
+            profileFeed: {
+              icon: 'account',
+              path: '/profiles',
+              actions: ProfileActions,
+              action: 'feed'
+            }
+          }
+        }
+      }
+    },
+    modal: {
+      type: 'modal',
+      initial: 'profileUpdate',
+      routes: {
+        profileUpdate: {
+          title: 'Edit Profile',
+          path: '/profile/edit/:uid',
+          actions: ProfileActions,
+          action: 'update',
+          initialParentRoute: 'profiles'
+        }
+      }
+    }
+  }
+};
+```
+
+### Modal Navigators
+Modals and dialogs are a great way to temporally capture the user flow without leaving the current route. It's even more powerful when it is directly integrated into navigation. A good example of this in use is Twitter. When a user selects a tweet, instead of navigating to the tweet it opens the tweet in a modal. All navigation from within the tweet stays within the modal. When the user exits the modal, they are still in the parent tweet feed. This layered routing behavior is built in to the R14 App. There are several differences between modal and regular navigators. Modal navigators must be defined in the root routes object, and must supply an initialParentRoute to a non-modal route.
+
+### Navigating Between Screens
+
+
+## App Context
+An important concept that is seen throughout this documentation is the app context. An instance of the R14 app context is available to all Actions, Domains, and components. Abbreviations are also offered for many of the context objects to promote concise, fun to write, code. What will not be found is a lot of boilerplate code. Almost everything the developer needs to find is readily available through the app context and core components. The app context is design to use a consistent mix of the namespace and factory patterns.
+
+In Action and Domain methods the app context is directly extended. In the example below the app **domain** and **api** are accessed directly from the context of the Action and Domain classes.
+```js
+import R14, {Redirect} from '../core';
+
+class ExampleActions extends R14.Actions{
+  async findAction(){
+    let ret = await this.domain.example.load();
+    return <Redirect to='myRoute' />
+  }
+}
+```
+```js
+import R14 from '../core';
+
+class ExampleDomain extends R14.Domain{
+  async load(){
+    return await this.api.query(`
+      query Find() {
+        find(){
+          uid
+          name
+        }
+      }`);
+  }
+}
+
+```
+In components the R14.connect() HOC is used to inject the app context into the components props using the app prop. In the example below the app context is accessed using **this.props.app**. Please note, instead of **domain** and **navigation** the abbreviations **dm** and **nav** are used. 
+```jsx
+import React from 'react';
+import R14, {
+  StyleSheet
+  View, 
+  Text
+} from '../core';
+
+export default R14.connect(
+  class ForwardView extends React.Component {
+    componentDidMount(){
+      this.load();
+    }
+    async load(){
+      this.props.app.ui.progressIndicator.show();
+      await this.props.app.dm.example.load();
+      this.props.app.ui.progressIndicator.hide();
+      this.props.app.nav.to('myRoute');
+    }
+    render() {
+      return (
+          <View>
+            <Text>Forwarding after load...</Text>
+          </View>
+      );
+    }
+  }
+);
+``` 
+
+
+## Actions
+Actions in a R14 App are analogous to controller actions found in the classic MVC pattern. The router receives a route request, maps it to an action defined in routes.config.js, and calls the appropriate method of the actions class. Route actions should return a component, either a screen or navigation (redirect, forward, etc...). Action classes are located in the /actions folder and named like '/actions/fooBarActions.js'. For example, 'profileActions'. The first parameter of an action method is the request data collected by the router (url params variables, post data, forms, etc). Variables can assigned directly in the action methods param list using destructuring as seen with uid and profileForm in the example below.
+
+**Please Note: This needs updating. An Actions.js file can be included in the root folder to define global actions. The method names of the action class should directly correspond to the route key or action value. The global action method will be used if actions is not given in the route config.**
+
+The following is an example of an action methods class for managing a profile. 
+```jsx
+import React from 'react';
+import R14, { Redirect } from '../core';
+import ProfileScreen from '../screens/ProfileScreen';
+import ProfileEditScreen from '../screens/ProfileEditScreen';
+
+export default class ProfileActions extends R14.Actions {
+  // Maps to the profile route
+  async profileAction({uid}) {
+    let profile = await this..dm.profile.fetch(uid);
+    return (
+      <ProfileScreen profile={profile} />
+    );
+  }
+  // Maps to the profileUpdate route
+  // Forms can be submitted directly to routes like in classic MVC apps, the form ui domain is automatically added to the request param
+  async updateAction({ uid, profileForm }) {
+    // Check for the form and log the user in
+    if (profileForm && profileForm.isValid()) {
+      let success = await this.dm.profile.update(profileForm);
+      // Return a redirect to a another route.
+      // Redirecting automatically updates the history and forwards the request
+      if (success) return <Redirect to='profile' />
+    }
+    let profile = await this..dm.profile.fetch(uid);
+    return (
+      <ProfileEditScreen profile={profile} />
+    );
+  }
+}
+
+```
+
+## Screens
+Screen components in a R14 app are similar to pages or views. A screen is the view content displayed inside the navigator layout defined in a route. They are typically displayed as the main content area for the root app portal or inside a modal component. By organizing application flow and logic into screens it makes it very intuitive to maintain and update an application. 
+
+The following example demonstrates a very simple profile page. 
+```jsx
+import React from 'react';
+import { View, Text } from '../core';
+
+class ProfileScreen extends React.Component {
+  render() {
+    let profile = this.props.profile;
+    return (
+      <View>
+        <View>
+          <Text>Name: { profile.name }</Text>
+        </View>
+        <View>
+          <Text>Username: { profile.username }</Text>
+        </View>
+      </View>
+    );
+  }
+}
+```
+
+#### Screen Component LifeCycle Methods
+In addition to the standard lifecycle methods provided by a react component, screen components also include componentWillFocus, componentDidFocus, componentWillBlur, and componentDidBlur. These are implemented to handle navigation events. By default in the native app (ios, android) all routes for a navigator are rendered at one time. However, the R14 app only calls the action and loads a screen component once a route is focused. These extra screen component lifecycle methods allow the developer to update a component when it is blurred or focussed by the navigator.
+
+### Navigating Between Screens
+TODO Needs Content
+
+### Navigation History
+TODO Needs Content
+
+## Styling Components
+Styling in a R14 App is nearly identical to React Native styling using StyleSheet. To get started please read https://facebook.github.io/react-native/docs/style and https://facebook.github.io/react-native/docs/stylesheet. Like React Native and other css in js frameworks, styles are written directly in a components javascript file. This makes it very easy for a developer to find and update styles. Unlike css, component styles are local in scope, which avoids traditional css conflicts.
+
+Styles are written in plain javascript and created using StyleSheet.create(). StyleSheet.create will accept either a style object, or an array of style objects and / or style object arrays. The example below shows the basic styling of a View and Text component. 
+```jsx
+import React from 'react';
+import {
+  StyleSheet
+  View, 
+  Text
+} from '../core';
+
+class ExampleScreen extends React.Component {
+  render() {
+    return (
+        <View style={styles.view} >
+          <Text style={[styles.text,styles.textLarge]}>Example Text!</Text>
+        </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#EEEEEE',
+  },
+  text: {
+    color: '#000000',
+    fontSize: 16
+  },
+  textLarge: {
+    fontSize: 24
+  }
+});
+```
+### StyleSheet Utilities
+StylesSheet provides the the react native properties **hairlineWidth** and **absoluteFill**, as well as the method **color()**.
+```js
+static color(htmlHex)
+```
+The Color method creates a color object that can modify the color and convert it into another StyleSheet compatible color. At this time only the **rgba(opacity)** is available. It will output the rgba value of the color.
+
+```js
+StyleSheet.color('#EFEFEF').rgba(.5)
+```
+
+### Dynamic Styling
+In many cases, styles can become much more complicated than using just a single static StyleSheet. Some common patterns for dynamically styling components are passing down styles through props and dynamically setting values before rendering a component. 
+##### Cascading styles with props
+StyleSheet styles can be passed down in props to effectively cascade styles (see this.props.style and this.props.containerStyle below). Props can also be used to dynamically add styles (see this.props.large below).
+```jsx
+import React from 'react';
+import {
+  StyleSheet
+  View, 
+  Text
+} from '../core';
+
+class TitleText extends React.Component {
+  render() {
+    return (
+      <View style={this.props.containerStyle} >
+        <Text style={[styles.titleText, this.props.style, this.props.large && styles.titleTextLarge]}>Example Text!</Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 20,
+    fontWeight: '700'
+  },
+  titleTextLarge: {
+    fontSize: 24
+  }
+});
+```
+##### Styling at render
+Dynamically creating styles is very powerful, and is used extensively on core components and in web animations. Just be careful that a stylesheet isn't being initialized excessively, because this may lead to issues. Also keep in mind that it may be easier to for developers to read static StyleSheets defined under a component.
+```jsx
+import React from 'react';
+import {
+  StyleSheet
+  View, 
+  Text
+} from '../core';
+
+class TitleText extends React.Component {
+  render() {
+    let dynamicStyles = this.createStyles();
+    return (
+      <View style={styles.containerStyle} >
+        <Text style={dynamicStyles.titleText}>Example Text!</Text>
+      </View>
+    );
+  }
+  createStyles(){
+    return StyleSheet.create({
+      titleText: {
+        fontSize: this.props.fontSize || 20,
+        fontWeight: this.props.fontWeight || '700',
+        color: '#000000'
+      }
+    });
+  }
+}
+const styles = StyleSheet.create({
+  containerStyle: {
+    backgroundColor: '#EEEEEE'
+  }
+});
+```
+
+### Responsive Styling
+To be able to accommodate many different devices, platforms, and screen sizes, the R14 App uses several different tools and methods to accomplish responsive design. Fluid responsive design patterns allow a developer to essentially create a one size fits all app, which is much easier to maintain and update. 
+
+#### StyleSheet style screen(size) callback
+Similar to css media queries, the StyleSheet object uses a style callback named screen. The first parameter is an object containing the current height and width of the screen. The screen callback will be called on resizes and it's values are observed by the ui state. In the example below, the view's background will change colors if the screen height or width is less than 640.
+
+```jsx
+import React from 'react';
+import R1 4, {
+  StyleSheet
+  View, 
+  Text
+} from '../core';
+
+export default R14.connect(
+  class ResponsiveView extends React.Component {
+    render() {
+      return (
+          <View style={styles.view} >
+            <Text>Responsive View!</Text>
+          </View>
+      );
+    }
+  }
+);
+
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#EEEEEE',
+    screen: ({height, width}) => {
+      if(height < 640 || width < 640) return {
+        backgroundColor: '#CECECE'
+      }
+    }
+  }
+});
+```
+
+#### Dimensions
+Another way of dynamically manipulating screen dimensions is by using the core Dimensions class. If you are not familiar with Dimensions in React Native, which this is based on, read more at https://facebook.github.io/react-native/docs/dimensions. Along with other core components, StyleSheet uses Dimensions.addEventListener('change') to listen for changes and trigger screen size callbacks.
+
+```jsx
+import React from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  View, 
+  Text
+} from '../core';
+
+class ResponsiveView extends React.Component {
+  render() {
+    let dynamicStyles = this.createStyles();
+    return (
+      <View style={styles.container} >
+        <Text>Responsive View!</Text>
+      </View>
+    );
+  }
+  createStyles(){
+    let {height, width} = Dimensions.get("window");
+    StyleSheet.create({
+      container: {
+        height: height,
+        width: width / 2,
+      }
+    });
+  }
+}
+```
+
+#### View OnLayout prop
+The core View components onLayout prop provides a method to style based on the views size. For more information about the React Native version of View, and it's onLayout prop, please look at https://facebook.github.io/react-native/docs/view#onlayout. In the example below, onLayout updates the view's style based on its size.
+
+```jsx
+import React from 'react';
+import {
+  StyleSheet,
+  View, 
+  Text
+} from '../core';
+
+class ResponsiveView extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleLayout = this.handleLayout.bind(this);
+    this.state = {
+      layout: {
+        height: null, 
+        width: null
+      }
+    };
+  }
+  handleLayout(event) {
+    this.setState({
+      layout: {
+        height: event.nativeEvent.layout.height,
+        width: event.nativeEvent.layout.width
+      }
+    });
+  }
+  render() {
+    let dynamicStyles = this.createStyles();
+    return (
+      <View 
+        onLayout={this.handleLayout}
+        style={styles.container} 
+      >
+        <Text>Responsive View!</Text>
+      </View>
+    );
+  }
+  createStyles(){
+    StyleSheet.create({
+      container: {
+        height: this.state.layout.height,
+        width: this.state.layout.height / 2,
+      }
+    });
+  }
+}
+```
+
+### Sizing and Flex
+The R14 App uses flex layout based on React Native. Flex layout greatly simplifies layout styling and alignment. For more information please read https://facebook.github.io/react-native/docs/flexbox.
+
+## Animations
+Animations are a really important tool used to create a great user experience. The R14 App includes two main core animation components to create smooth natively accelerated animations and transitions, AnimatedView and AnimatedText. On native, these components are built using the amazing Animated library https://facebook.github.io/react-native/docs/animated, and use the native drivers by default. For the web components, animations are dynamically generated into pure  CSS animations https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations. This result is extremely performant and smooth animations. Please note, the native driver only supports the use of non-layout properties like opacity and transforms https://facebook.github.io/react-native/docs/animations#caveats. If you need to animate other properties, set useNativeDriver={false}, however it may effect the quality of animations.
+
+In the future we are planning on adding more complex transitions as well as percentage based keyframe animations. But, in almost all cases simple animations and transitions are more than enough.
+
+The below example demonstrates a simple text animation. The text will continuously fade in and out, unless the iterationCount prop is supplied.
+```jsx
+import React from 'react';
+import {
+  AnimatedText,
+} from '../core';
+
+class FadingText extends React.Component {
+  render() {
+    return (
+      <AnimatedText
+        to={{
+          opacity: 1
+        }}
+        from={{
+          opacity: .2
+        }}
+        duration={250}
+        iterationCount={this.props.iterationCount || "infinite"}
+      >
+        Fading Text!
+      </AnimatedText>
+    );
+  }
+}
+ 
+```
+### Transitions
+Many UX use cases call for transitions, rather than simple linear animations. Transition allow the developer to animate the entering and exiting of components based on a boolean state (the **in** prop). For example, the animated opening and closing of a dropdown menu. 
+
+Transitions have a few important extra properties. The **unmountOnExit** prop will remove the component after the exit transition completes. The **animateOnMount** prop will run the initial animation on it's first mount, otherwise the enter or exit animation style will be applied before mount.
+
+In the example component below, an image will animate in and out when the button is pressed. 
+```jsx
+import React from 'react';
+import {
+  View,
+  AnimatedView,
+  Image
+} from '../core';
+
+class ImageToggle extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleTogglePress = this.handleTogglePress.bind(this);
+    this.state = {
+      show: false
+    };
+  }
+  handleTogglePress() {
+    this.setState({
+      show: !(this.state.show)
+    });
+  }
+  render() {
+    return (
+      <View>
+        <Button
+          title='Toggle Image'
+          onPress={this.handleTogglePress}
+        />
+        <AnimatedView
+          in={this.state.show}
+          enter={{
+            opacity: 1,
+             transform: [
+              { scale: 1 },
+              { translateY: 0 }
+            ]
+          }}
+          exit={{
+            opacity: .1,
+            transform: [
+              { scale: .5 },
+              { translateY: -24 }
+            ]
+          }}
+          duration={250}
+          animateOnMount
+          unmountOnExit
+        >
+          <Image 
+            style={{width: 50, height: 50}}
+            source={this.props.imageSource} 
+          />
+        </AnimatedView>
+      </View>
+    );
+  }
+}
+```
+
+## Themes
+
+The R14 App includes a theme provider system to make it easy to create and maintain consistent themes across all core components, with very little styling. To access the theme provider simply import Theme or Colors from './core' (Colors is equivalent to Theme.colors). The theme provider system is managed by the UI domain (R14.app.ui.theme) so it can also be called from the app context.
+
+```jsx
+import React from 'react';
+import R14, {
+  Theme,
+  Colors,
+  View, 
+  Button
+} from '../core';
+
+export default R14.connect(
+  class ExampleScreen extends React.Component {
+    constructor(props){
+      super(props);
+      this.handlePress = this.handlePress.bind(this);
+    }
+    async handlePress() {
+      let theme = 
+        this.props.app.ui.theme.colorScheme === 'default' 
+        ? 'light' 
+        : 'default';
+      // Or using the imported Theme instance
+      Theme.setColorScheme(theme);
+    }
+    render() {
+      return (
+          <View
+            style={styles.view}
+          >
+            <Button
+              title='Toggle Theme'
+              onPress={this.handlePress}
+              color={this.props.app.ui.theme.colors.primary}
+            />
+          </View>
+      );
+    }
+  }
+);
+// Below both Colors and Theme are used for example purposes. Most of the time only Colors is needed when styling.
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: Colors.secondary,
+    borderColor: Theme.colors.secondaryDark
+  }
+});
+```
+#### Theme Config
+The theme config file defines the different color and component themes for an app. It will be automatically included when the R14 app is initialized. It should be named 'themes.config.js' in the '/config/ folder and export a single default object containing 'colors' and 'components'. The colors config must have at least one color scheme. The color key for each theme correspond to the color scheme concepts used by in the material design color system, for more information please read https://material.io/design/color. Component themes for an app is currently is development.
+```js
+export default {
+  colors: {
+    default: {
+      primary: "#0097a7",
+      onPrimary: "#FFFFFF",
+      primaryLight: "#56c8d8",
+      onPrimaryLight: "#FFFFFF",
+      primaryDark: "#006978",
+      onPrimaryDark: "#FFFFFF",
+      secondary: "#c62828",
+      onSecondary: "#FFFFFF",
+      secondaryLight: "#ff5f52",
+      onSecondaryLight: "#FFFFFF",
+      secondaryDark: "#8e0000",
+      onSecondaryDark: "#FFFFFF",
+      background: "#1b1b1b",
+      onBackground: "#FFFFFF",
+      surface: "#212121",
+      onSurface: "#FFFFFF",
+      error: "#B00020",
+      onError: "#FFFFFF"
+    },
+    light: {
+      ...lightColors
+    }
+  }
+}
+```
+
+### Fonts
+TODO Needs Content
+
+### Icons
+TODO Needs Content
+
+## App State
+In modern applications reactive state management is both powerful and important. In React, each component has its own state, and the component is rendered when the state is updated. But what if, for example, you need to update the header, slide-out menu, and other components after a successful login?  This is where application level state management becomes very powerful. The user logs in, the app updates 'loggedIn' state to true, and any components which observe the 'loggedIn' state are automatically re-rendered. There are several different libraries and patterns designed to deal with state management, such as Redux, MobX, React Context API, and React Hooks. 
+
+ The R14 React app uses a reactive state management system built on top of MobX, but abstracted to use many of the straight forward concepts introduced by Reacts component state. Any connected component (wrapped with R14.connect()) can observe changes to the app's state by referencing app state context variables in the context of it's render method. To keep things organized, maintainable, and scalable the app state is organized into logical domains.
+
+### Domains
+Domains are a very important concept in an R14 React App. They help organize the business and ui model code, as well as manage the reactive app state. Domains are split into two different root subsets, UI and business. The UI domains manage parts of the ui (for example the header, data tables, forms) and the business domains manage business logic (for example users, shopping cart, todo list items). For example, let's say we are building a Todo List. We may want a business domain 'todo' which deals with all code related to the Todo Lists, and a ui domains 'header' which updates based on search, login, etc... Business domains can be accessed from app context with 'app.{dm or domain}.{domainKey}'. For ui: 'app.ui.{domainKey}'.
+
+Just like React components, R14 domains are stateful. In fact, domain state works exactly like React component state: state is initialized in the constructor, updated using setState, and observed during component rendering. Let's look at a simple example:
+
+```jsx
+class ExampleDomain extends R14.Domain{
+  constructor(){
+    super();
+    // Init the state just as you would in React
+    this.state = {
+      loaded: false
+    }
+  }
+  get isLoaded(){
+    // isLoaded will be observed as this.state.loaded in a component
+    // Just be careful to not make domain state confusing in the component
+    return this.state.loaded;
+  }
+  async load(){
+    // Wait for the someAsyncFn to load something
+    await someAsyncFn();
+    // Set domain state to loaded
+    this.setState({
+      loaded: true
+    });
+  }
+}
+```
+In the screen component below, R14.connect() inserts the R14 app context into props.app and defines the component as a domain state observer. Like React component state, the component will update any domain state variables that are referenced during render.
+```jsx
+export default R14.connect(
+  class ExampleScreen extends React.Component {
+    constructor(props){
+      super(props);
+      // Call the load method of the example domain.
+      // Since the domain is detached from the component we don't need to wait for componentDidMount.
+      this.props.app.dm.example.load();
+      // Or to make code easier to read
+      // this.exampleDm = this.props.app.dm.example;
+      // this.exampleDm.load();
+    }
+    render(){
+      // this.exampleDm.isLoaded could also be used below, with the same results.
+      return(
+        <View>
+          <Text>
+            {this.props.app.dm.example.state.loaded 
+              ? 'Load Complete!!!' 
+              : 'Loading...'}
+          </Text>
+        </View>
+      );
+    }
+  }
+);
+```
+
+## Core Components
+Core components are the primary building blocks to be used when developing the UI. The following is documentation for several of the commonly used core components.
+
+### Forms
+The R14 App provide the developer with a consistent and declarative way to build interactive user input forms. Forms generally consist of a form component, fields, and a submit control. Fields wrapped inside the form are controlled components, and the forms state is managed by the UI domain. 
+
+The example below shows a basic login screen, using a form component and the local handleSubmit method to process and redirect the form submission. Even without looking at the component api, the declarative nature of React makes it easy to intuitively understand how the components work. 
+```jsx
+import React from 'react';
+import R14, {
+  Redirect,
+  Form,
+  SubmitButton,
+  TextInputField
+} from '../core';
+
+export default R14.connect(
+  class LoginScreen extends React.Component {
+    constructor(props) {
+      super(props);
+      // Bind the handleSubmit method so it keeps it's context.
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    async handleSubmit(loginForm) {
+      // Wait for the someAsyncFn to complete.
+      let success = await someAsyncFn(loginForm);
+      // If success, return a redirect to the profile action
+      if (success) return <Redirect to='profile' />;
+    }
+    render() {
+      return (
+          <Form
+            name='loginForm'
+            title='Login'
+            onSubmit={this.handleSubmit}
+            validateBeforeSubmit
+          >
+            <TextInputField
+              name='username'
+              label='Username'
+              icon='account'
+              required='Enter Username'
+            />
+            <TextInputField
+              name='password'
+              label='Password'
+              icon='lock'
+              secure
+              required='Enter Password'
+            />
+            <SubmitButton
+              title='Continue'
+            />
+          </Form>
+      );
+    }
+  }
+);
+```
+#### Form UI Domain
+The R14 App controls forms and form state in the UI domain (form or fm). This allows developers to quickly develop highly interactive forms, while the ui domain does most of the heavy lifting. This also makes it easy to programmatically read and update forms from anywhere in the app, not just it's parent component. In the example above, the loginForm object passed to handleSubmit is an instance of the ui form domain. It is bound directly to the form and form fields component state, and can be used to validate, iterate fields, update field options, and more.
+
+Let's take a look at a simple example of iterating through form fields and setting an error message on a field. This could be easily done using a custom validator, but for the purpose of this example let's validate it from inside the loginScreen component.
+```jsx
+async handleSubmit(loginForm) {
+  // Manually validate a form.
+  // If the form is not valid, isValid will automatically update the field errors messages.
+  // Please note, in the example above the Form prop validateBeforeSubmit will validate the form before calling onSubmit, so loginForm.validate() would always return true.
+  if(! await loginForm.isValid()) return false;
+
+  let success = true;
+  // Iterate through the elements, and update any invalid elements.
+  // The form ui state will automatically batch state updates until the action is complete.
+  loginForm.elmts.forEach((element)=>{
+    if(element.value === 'admin'){
+      // Set the error message to be displayed under the form field
+      element.setError('Sorry, admin is a reserved word');
+      // Focus the first error element
+      success && element.setFocus(true); 
+      success = false;
+    }
+  });
+  // If valid, redirect to profile, otherwise return false.
+  return success ? <Redirect to='profile' /> : false;
+}
+
+```
+In some cases a form domain instance may need to be accessed from outside the form component context. Any active form can be manipulated through the app ui domain context. The form component will observe any changes made.
+```jsx
+async updateExternalForm(){
+  // The form instances are available in the ui domain with keys form or fm.
+  let loginForm = this.props.app.ui.fm('loginForm');
+  // Log the name of each element
+  loginForm.elmts.forEach((element)=>{
+    console.log(`Form Element: ${element.name}`,element.value);
+  });
+  // Reset the form 
+  loginForm.reset();
+}
+```
+### DataTable
+TODO Needs Content
+
+## API / GraphQL
+The R14 App includes built in support to communicate with any kind of api service. The api base path is configured in config.js and the api connector is available in the app context 'app.api', and includes basic methods like fetch, post, and submit (a form submission abstraction). While the api can be used to make Rest, RPC, and SOAP requests, it was built with GraphQL / R14-server as the primary use case. If you are not familiar with GraphQL, please take a look at https://graphql.org/.
+
+GraphQL allows the developer to request and update only the data they need, at the same time using strict type validation. It also makes it possible to query complex and dynamic data sets from the GraphQL server without needing to create extra backend endpoints, saving time on development and backend change requests. In GraphQL there are 2 main request types, mutations and queries. Mutations are any request that causes an insert, update, or delete on the api data source. Queries fetch data. Mutations and queries use nearly identical syntax, but the separation of usage helps developers organize API concerns by function, creating more maintainable and upgradable code.
+
+For access to the app specific api documentation, R14-server uses a web based GraphQL API explorer called GraphiQL. A link and credentials for the GraphiQL development instance associated with a R14 App should be provided by the back-end development team.   
+
+The R14 api connector has two main methods, query (qry) and mutate (mut). The first parameter is the GraphQL query string, the second a data object with variable keys to be supplied to the query. The example below demonstrates the basic usage of the api connector making GraphQL requests.
+```js
+export default class ProfileDomain extends R14.Domain {
+  async find(options = null) {
+    return await this.api.qry(`
+      query FindProfiles($page: Int, $resultsPerPage: Int, $totalCount: Boolean!, $sort: [SortOption!]!) {
+        profiles(page: $page, resultsPerPage: $resultsPerPage, sort: $sort){
+          totalCount @include(if: $totalCount)
+          nodes {
+            uid
+            username
+            name
+          }
+        }
+      }`, options
+    );
+  }
+  async update(values) {
+    let res = await this.api.mutate(`
+      mutation UpdateProfile($input: UpdateProfileInput!) {
+        updateProfile(input: $input){
+          error
+          profile {
+            uid
+            name
+          }
+        }
+      }`, {
+        input: values
+      }
+    );
+    if(res.error) throw new Error(res.error);
+    else return res.profile;
+  }
+```
+
