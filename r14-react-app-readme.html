@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>R14 React App</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="r14-react-app">R14 React App</h1>
+<p>Rule14 creates innovative products, using cutting edge technologies. We make things that other people can't. The R14 React App started exactly the way you would expect any Rule14 product does, as a little R&amp;D project. The question was, would it be possible to create a React based rapid development framework, with a single codebase, for multiple platforms? Yes, it is possible. The R14 React App allows developers to quickly build and deploy beautiful, interactive, complex React apps natively to Web, iOS, Android (windows and mac in development) using a single codebase.</p>
+<p>The R14 React App is written using proprietary core libraries integrated with production ready open source projects (GraphQL, React Navigation, React Router, MobX, Expo, etc...). Development and architecture follows many concepts of the MVC, MVP, and observer design patterns. It is designed on the premise that a UI can be created quickly, leveraging the power of Reacts declarative language and a robust set of core R14, application agnostic, components.</p>
+<h2 id="table-of-contents">Table of Contents<!-- omit in toc --></h2>
+<ul>
+<li><a href="#r14-react-app">R14 React App</a>
+<ul>
+<li><a href="#how-does-it-work">How does it work?</a></li>
+<li><a href="#whats-next">What's Next?</a></li>
+<li><a href="#contribute-to-r14-react-app">Contribute to R14 React App</a></li>
+<li><a href="#getting-started">Getting Started</a>
+<ul>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#create-a-project">Create a Project</a></li>
+<li><a href="#project-structure">Project structure</a></li>
+<li><a href="#run-your-project">Run your project</a>
+<ul>
+<li><a href="#web">Web</a></li>
+<li><a href="#native">Native</a></li>
+</ul>
+</li>
+<li><a href="#push-your-project">Push your project.</a></li>
+</ul>
+</li>
+<li><a href="#building-an-app">Building an App</a></li>
+<li><a href="#navigation">Navigation</a>
+<ul>
+<li><a href="#routes-and-portals">Routes and Portals</a>
+<ul>
+<li><a href="#routes-config">Routes Config</a></li>
+</ul>
+</li>
+<li><a href="#modal-navigators">Modal Navigators</a></li>
+<li><a href="#navigating-between-screens">Navigating Between Screens</a></li>
+</ul>
+</li>
+<li><a href="#app-context">App Context</a></li>
+<li><a href="#actions">Actions</a></li>
+<li><a href="#screens">Screens</a>
+<ul>
+<li><a href="#screen-component-lifecycle-methods">Screen Component LifeCycle Methods</a></li>
+<li><a href="#navigating-between-screens-1">Navigating Between Screens</a></li>
+<li><a href="#navigation-history">Navigation History</a></li>
+</ul>
+</li>
+<li><a href="#styling-components">Styling Components</a>
+<ul>
+<li><a href="#stylesheet-utilities">StyleSheet Utilities</a></li>
+<li><a href="#dynamic-styling">Dynamic Styling</a>
+<ul>
+<li><a href="#cascading-styles-with-props">Cascading styles with props</a></li>
+<li><a href="#styling-at-render">Styling at render</a></li>
+</ul>
+</li>
+<li><a href="#responsive-styling">Responsive Styling</a>
+<ul>
+<li><a href="#stylesheet-style-screensize-callback">StyleSheet style screen(size) callback</a></li>
+<li><a href="#dimensions">Dimensions</a></li>
+<li><a href="#view-onlayout-prop">View OnLayout prop</a></li>
+</ul>
+</li>
+<li><a href="#sizing-and-flex">Sizing and Flex</a></li>
+</ul>
+</li>
+<li><a href="#animations">Animations</a>
+<ul>
+<li><a href="#transitions">Transitions</a></li>
+</ul>
+</li>
+<li><a href="#themes">Themes</a>
+<ul>
+<li><a href="#theme-config">Theme Config</a></li>
+<li><a href="#fonts">Fonts</a></li>
+<li><a href="#icons">Icons</a></li>
+</ul>
+</li>
+<li><a href="#app-state">App State</a>
+<ul>
+<li><a href="#domains">Domains</a></li>
+</ul>
+</li>
+<li><a href="#core-components">Core Components</a>
+<ul>
+<li><a href="#forms">Forms</a>
+<ul>
+<li><a href="#form-ui-domain">Form UI Domain</a></li>
+</ul>
+</li>
+<li><a href="#datatable">DataTable</a></li>
+</ul>
+</li>
+<li><a href="#api--graphql">API / GraphQL</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>The R14 App uses both React Native and ReactJs to generate platform specific code based on one codebase. It accomplishes this by transpiling abstracted and normalized core platform libraries into multiple platform specific projects. This is done automatically and in real time. When a developer makes a code change, the app is automatically updated and refreshed on any running platforms, creating a fast, efficient, and fun development experience.</p>
+<h2 id="whats-next">What's Next?</h2>
+<p>Before proceeding with development on a R14 based app, you should be very familiar with React Native. This project is heavily based on React Native, and many of the concepts in this documentation reference it directly. <a href="https://facebook.github.io/react-native/docs/getting-started">https://facebook.github.io/react-native/docs/getting-started</a> is a great place to start. In fact, you will notice that many of the core technologies used in the R14 App are documented here (Expo, React Navigation, Animated, and so on...).</p>
+<h2 id="contribute-to-r14-react-app">Contribute to R14 React App</h2>
+<p>We want this to grow like an open source project. We strongly encourage any Rule14 developers to contribute code and their unique skill sets. Whether it's a bug, a new core component, or just edits to this document, your help would be greatly appreciated.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>At this time all scripts and tools have been written in linux. Any help to port this to windows and mac would be greatly appreciated.</p>
+<h3 id="tools">Tools</h3>
+<ol>
+<li>VSCode code editor (or any ide with full React and Node integration) <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li>Chrome</li>
+<li>Android Studio or XCode for emulation (and final builds)</li>
+<li>Install Git</li>
+<li>Install npm.</li>
+</ol>
+<h3 id="create-a-project">Create a Project</h3>
+<p>At this time these instructions are for <strong>LINUX</strong> only. If you would like to help convert everything to node and test for different platforms, that would be very helpful.</p>
+<p>Using git, clone the r14-react-app from <a href="https://github.com/hgmventures/r14-react-app">https://github.com/hgmventures/r14-react-app</a> into your workspace.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/hgmventures/r14-react-app r14-react-app</span>
+</code></pre>
+<p>From your workspace (for example, /var/www/html) execute ./r14-react-app/install. You will be asked for a project name, this will become the name of the folder added to your workspace. To develop an existing R14 React App project, add it's git url when prompted.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./r14-react-app/install</span>
+</code></pre>
+<p>The code for your project will be located in the ./app folder. The ./app folder should be the root of the projects git repository.</p>
+<h3 id="project-structure">Project structure</h3>
+<pre><code>project
+└───app
+│   │
+│   └───actions
+│   └───components
+│   └───config
+│   └───domains
+│   └───screens
+│   
+└───core
+└───platforms
+└───scripts
+
+</code></pre>
+<h3 id="run-your-project">Run your project</h3>
+<p>All the scripts to run your project are in the ./scripts folder of your project. It's usually helpful to run one script per terminal.</p>
+<p>The ./watch script will watch for project changes and update the platform builds in real-time. From the ./scripts folder execute watch. <strong>The watch script must be running for the r14 react app to update code changes.</strong>
+From the ./scripts folder execute run-web</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./scripts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">./watch</span>
+</code></pre>
+<h4 id="web">Web</h4>
+<p>From the ./scripts folder execute run-web.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./scripts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">./run-web</span>
+</code></pre>
+<h4 id="native">Native</h4>
+<p>From the ./scripts folder execute run-native. After expo loads in the browser, follow instructions for either to load your project using either an emulator or your device.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./scripts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">./run-native</span>
+</code></pre>
+<h3 id="push-your-project">Push your project.</h3>
+<p>If the project is new, and was not cloned from a git repo, first intialize your ./app folder as a git repo.</p>
+<p>From the ./scripts folder execute git-push.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./scripts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">./git-push</span>
+</code></pre>
+<h2 id="building-an-app">Building an App</h2>
+<p>Now that everything is setup, it's time to start building an app. A R14 React App is made up of fundamental core building blocks based on familiar software patterns. The easiest way to get started coding is to read through the following documentation and try out some of the examples.</p>
+<h2 id="navigation">Navigation</h2>
+<p>The R14 React App includes an advanced routing and layout system. The navigation base is built on top of and based on <a href="https://reactnavigation.org/">https://reactnavigation.org/</a>, so many of the concepts are very similar. Routing is split into navigators. Navigators have their own layout (like a header, tab bar, or modal) and child routes. Each child route is either a navigator, or it is mapped to an Action returning a screen. This allows for complex layouts and routing using only a simple routes config file.</p>
+<h3 id="routes-and-portals">Routes and Portals</h3>
+<p>Routes are uniquely named keys that map to an Action and a path (url for web, deep link for native) or a navigator. The main app contains two main router portals, 'root' and 'modal'. The root route portal contains all the routes that will be displayed on the root layer of the app. The modal route portal displays a modal route dialog above the main root layer. Modal portals can not have a parent navigator.</p>
+<h4 id="routes-config">Routes Config</h4>
+<p>The routes config file defines all the routes for the application. At this time routes cannot be dynamically defined. It will be automatically included when the R14 app is initialized and should be saved at '/config/routes.config.js'. The root of the route config object must contain an initial route, and the root routes under routes. Each navigator route can contain as many child routes and navigators as needed, allowing for limitless flexibility. Please note that modal navigators are a special instance of navigators and must be placed in the root routes.</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ProfileActions</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../actions/ProfileActions&#x27;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">initialRoute</span>: <span class="hljs-string">&#x27;default&#x27;</span>
+  <span class="hljs-attr">routes</span>: {
+    <span class="hljs-attr">default</span>:  {
+      <span class="hljs-attr">initialRoute</span>: <span class="hljs-string">&#x27;main&#x27;</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;stack&#x27;</span>,
+      <span class="hljs-attr">header</span>: {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;My R14 App&#x27;</span>
+      },
+      <span class="hljs-attr">routes</span>: {
+        <span class="hljs-attr">main</span>: {
+          <span class="hljs-attr">initialRoute</span>: <span class="hljs-string">&#x27;profileFeed&#x27;</span>,
+          <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;tab&#x27;</span>,
+          <span class="hljs-attr">tabNavigator</span>: {
+            <span class="hljs-attr">position</span>: <span class="hljs-string">&#x27;responsive-left-bottom&#x27;</span>,
+            <span class="hljs-attr">showIcon</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">showLabel</span>: <span class="hljs-literal">false</span>
+          },
+          <span class="hljs-attr">routes</span>: {
+            <span class="hljs-attr">profile</span>: {
+              <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;account&#x27;</span>,
+              <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/profile/:uid&#x27;</span>,
+              <span class="hljs-attr">actions</span>: <span class="hljs-title class_">ProfileActions</span>,
+            },
+            <span class="hljs-attr">profileFeed</span>: {
+              <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;account&#x27;</span>,
+              <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/profiles&#x27;</span>,
+              <span class="hljs-attr">actions</span>: <span class="hljs-title class_">ProfileActions</span>,
+              <span class="hljs-attr">action</span>: <span class="hljs-string">&#x27;feed&#x27;</span>
+            }
+          }
+        }
+      }
+    },
+    <span class="hljs-attr">modal</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;modal&#x27;</span>,
+      <span class="hljs-attr">initial</span>: <span class="hljs-string">&#x27;profileUpdate&#x27;</span>,
+      <span class="hljs-attr">routes</span>: {
+        <span class="hljs-attr">profileUpdate</span>: {
+          <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Edit Profile&#x27;</span>,
+          <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/profile/edit/:uid&#x27;</span>,
+          <span class="hljs-attr">actions</span>: <span class="hljs-title class_">ProfileActions</span>,
+          <span class="hljs-attr">action</span>: <span class="hljs-string">&#x27;update&#x27;</span>,
+          <span class="hljs-attr">initialParentRoute</span>: <span class="hljs-string">&#x27;profiles&#x27;</span>
+        }
+      }
+    }
+  }
+};
+</code></pre>
+<h3 id="modal-navigators">Modal Navigators</h3>
+<p>Modals and dialogs are a great way to temporally capture the user flow without leaving the current route. It's even more powerful when it is directly integrated into navigation. A good example of this in use is Twitter. When a user selects a tweet, instead of navigating to the tweet it opens the tweet in a modal. All navigation from within the tweet stays within the modal. When the user exits the modal, they are still in the parent tweet feed. This layered routing behavior is built in to the R14 App. There are several differences between modal and regular navigators. Modal navigators must be defined in the root routes object, and must supply an initialParentRoute to a non-modal route.</p>
+<h3 id="navigating-between-screens">Navigating Between Screens</h3>
+<h2 id="app-context">App Context</h2>
+<p>An important concept that is seen throughout this documentation is the app context. An instance of the R14 app context is available to all Actions, Domains, and components. Abbreviations are also offered for many of the context objects to promote concise, fun to write, code. What will not be found is a lot of boilerplate code. Almost everything the developer needs to find is readily available through the app context and core components. The app context is design to use a consistent mix of the namespace and factory patterns.</p>
+<p>In Action and Domain methods the app context is directly extended. In the example below the app <strong>domain</strong> and <strong>api</strong> are accessed directly from the context of the Action and Domain classes.</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {<span class="hljs-title class_">Redirect</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleActions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">R14.Actions</span>{
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">findAction</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">let</span> ret = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">domain</span>.<span class="hljs-property">example</span>.<span class="hljs-title function_">load</span>();
+    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#x27;myRoute&#x27;</span> /&gt;</span></span>
+  }
+}
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleDomain</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">R14.Domain</span>{
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">load</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">api</span>.<span class="hljs-title function_">query</span>(<span class="hljs-string">`
+      query Find() {
+        find(){
+          uid
+          name
+        }
+      }`</span>);
+  }
+}
+
+</code></pre>
+<p>In class components the R14.connect() HOC is used to inject the app context into the components props using the app prop. R14.connect() also allows the component to observe changes to domain state. In the example below the app context is accessed using <strong>this.props.app</strong>. Please note, instead of <strong>domain</strong> and <strong>navigation</strong> the abbreviations <strong>dm</strong> and <strong>nav</strong> are used.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">ForwardView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>){
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">load</span>();
+    }
+    <span class="hljs-keyword">async</span> <span class="hljs-title function_">load</span>(<span class="hljs-params"></span>){
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">ui</span>.<span class="hljs-property">progressIndicator</span>.<span class="hljs-title function_">show</span>();
+      <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">dm</span>.<span class="hljs-property">example</span>.<span class="hljs-title function_">load</span>();
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">ui</span>.<span class="hljs-property">progressIndicator</span>.<span class="hljs-title function_">hide</span>();
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">nav</span>.<span class="hljs-title function_">to</span>(<span class="hljs-string">&#x27;myRoute&#x27;</span>);
+    }
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> (
+          <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Forwarding after load...<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+      );
+    }
+  }
+);
+</code></pre>
+<p>In functional components hooks are used to access the app context. Instead of accessing the app through props, <strong>useApp</strong> can be used. In the example below hooks are used to achieve the same thing as the above example. Please note, the <strong>useDomain</strong> hook is essentially the same thing as <strong><a href="http://this.props.app.dm">this.props.app.dm</a></strong> above.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>, 
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">ForwardView</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> exampleDomain = <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">useDomain</span>(<span class="hljs-string">&quot;example&quot;</span>);
+  <span class="hljs-keyword">const</span> progressIndicator = <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">useUi</span>(<span class="hljs-string">&quot;progressIndicator&quot;</span>);
+  <span class="hljs-keyword">const</span> nav = <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">useNav</span>();
+    <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">()=&gt;</span>{
+      progressIndicator.<span class="hljs-title function_">show</span>();
+      exampleDomain.<span class="hljs-title function_">load</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">()=&gt;</span>{
+        progressIndicator.<span class="hljs-title function_">hide</span>();
+        nav.<span class="hljs-title function_">to</span>(<span class="hljs-string">&#x27;myRoute&#x27;</span>);
+      }
+    }, []);
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Forwarding after load...<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+};
+</code></pre>
+<h2 id="actions">Actions</h2>
+<p>Actions in a R14 App are analogous to controller actions found in the classic MVC pattern. The router receives a route request, maps it to an action defined in routes.config.js, and calls the appropriate method of the actions class. Route actions should return a component, either a screen or navigation (redirect, forward, etc...). Action classes are located in the /actions folder and named like '/actions/fooBarActions.js'. For example, 'profileActions'. The first parameter of an action method is the request data collected by the router (url params variables, post data, forms, etc). Variables can assigned directly in the action methods param list using destructuring as seen with uid and profileForm in the example below.</p>
+<p><strong>Please Note: This needs updating. An Actions.js file can be included in the root folder to define global actions. The method names of the action class should directly correspond to the route key or action value. The global action method will be used if actions is not given in the route config.</strong></p>
+<p>The following is an example of an action methods class for managing a profile.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, { <span class="hljs-title class_">Redirect</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ProfileScreen</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../screens/ProfileScreen&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ProfileEditScreen</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../screens/ProfileEditScreen&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Actions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">R14.Actions</span> {
+  <span class="hljs-comment">// Maps to the profile route</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">profileAction</span>(<span class="hljs-params">{uid}</span>) {
+    <span class="hljs-keyword">let</span> profile = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>..<span class="hljs-property">dm</span>.<span class="hljs-property">profile</span>.<span class="hljs-title function_">fetch</span>(uid);
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ProfileScreen</span> <span class="hljs-attr">profile</span>=<span class="hljs-string">{profile}</span> /&gt;</span></span>
+    );
+  }
+  <span class="hljs-comment">// Maps to the profileUpdate route</span>
+  <span class="hljs-comment">// Forms can be submitted directly to routes like in classic MVC apps, the form ui domain is automatically added to the request param</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">updateAction</span>(<span class="hljs-params">{ uid, profileForm }</span>) {
+    <span class="hljs-comment">// Check for the form and log the user in</span>
+    <span class="hljs-keyword">if</span> (profileForm &amp;&amp; profileForm.<span class="hljs-title function_">isValid</span>()) {
+      <span class="hljs-keyword">let</span> success = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">dm</span>.<span class="hljs-property">profile</span>.<span class="hljs-title function_">update</span>(profileForm);
+      <span class="hljs-comment">// Return a redirect to a another route.</span>
+      <span class="hljs-comment">// Redirecting automatically updates the history and forwards the request</span>
+      <span class="hljs-keyword">if</span> (success) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#x27;profile&#x27;</span> /&gt;</span></span>
+    }
+    <span class="hljs-keyword">let</span> profile = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">dm</span>.<span class="hljs-property">profile</span>.<span class="hljs-title function_">fetch</span>(uid);
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ProfileEditScreen</span> <span class="hljs-attr">profile</span>=<span class="hljs-string">{profile}</span> /&gt;</span></span>
+    );
+  }
+}
+
+</code></pre>
+<h2 id="screens">Screens</h2>
+<p>Screen components in a R14 app are similar to pages or views. A screen is the view content displayed inside the navigator layout defined in a route. They are typically displayed as the main content area for the root app portal or inside a modal component. By organizing application flow and logic into screens it makes it very intuitive to maintain and update an application.</p>
+<p>The following example demonstrates a very simple profile page using class components:</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfileScreen</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> profile = <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">profile</span>;
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Name: { profile.name }<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Username: { profile.username }<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+}
+</code></pre>
+<p>The previous example using a functional component:</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">View</span>, <span class="hljs-title class_">Text</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ProfileScreen</span>(<span class="hljs-params">{ profile }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Name: { profile.name }<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Username: { profile.username }<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+  );
+};
+</code></pre>
+<h4 id="screen-component-lifecycle-methods">Screen Component LifeCycle Methods</h4>
+<p><strong>Deprecated</strong>. In addition to the standard lifecycle methods provided by a react component, screen components also include componentWillFocus, componentDidFocus, componentWillBlur, and componentDidBlur. These are implemented to handle navigation events. By default in the native app (ios, android) all routes for a navigator are rendered at one time. However, the R14 app only calls the action and loads a screen component once a route is focused. These extra screen component lifecycle methods allow the developer to update a component when it is blurred or focussed by the navigator.</p>
+<h3 id="navigating-between-screens-1">Navigating Between Screens</h3>
+<p>Navigation is very simple in the r14 react app using the <strong>nav</strong> class in the app context. Below are simple examples of navigating between screens. For class components <strong>R14.connect()</strong> HOC must be used to get the app context.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">CancelButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Cancel&#x27;</span>
+          <span class="hljs-attr">key</span>=<span class="hljs-string">&#x27;cancel&#x27;</span>
+          <span class="hljs-attr">variant</span>=<span class="hljs-string">&#x27;text&#x27;</span>
+          <span class="hljs-attr">onPress</span>=<span class="hljs-string">{()</span> =&gt;</span>
+            this.props.redirect
+              ? this.props.app.nav.to(this.props.redirect, this.props.params)
+              : this.props.app.nav.back(this.props.params)
+          }
+        /&gt;</span>
+      );
+    }
+  }
+);
+
+</code></pre>
+<p>For functional components the <strong>useNav</strong> hook is used for navigation. or <strong>useApp</strong> with <strong>app.nav</strong> can be used in the same way.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">CancelButton</span>(<span class="hljs-params">{ redirect = <span class="hljs-literal">null</span>, params = <span class="hljs-literal">null</span> }</span>) {
+  <span class="hljs-keyword">const</span> nav = <span class="hljs-title function_">useNav</span>();
+  <span class="hljs-keyword">const</span> app = <span class="hljs-title function_">useApp</span>();
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Cancel&#x27;</span>
+      <span class="hljs-attr">key</span>=<span class="hljs-string">&#x27;cancel&#x27;</span>
+      <span class="hljs-attr">variant</span>=<span class="hljs-string">&#x27;text&#x27;</span>
+      <span class="hljs-attr">onPress</span>=<span class="hljs-string">{()</span> =&gt;</span>
+        redirect
+          ? nav.to(redirect, params)
+          : app.nav.back(params)
+      }
+    /&gt;</span>
+  );
+}
+</code></pre>
+<h3 id="navigation-history">Navigation History</h3>
+<p>TODO Needs Content</p>
+<h2 id="styling-components">Styling Components</h2>
+<p>Styling in a R14 App is nearly identical to React Native styling using StyleSheet. To get started please read <a href="https://facebook.github.io/react-native/docs/style">https://facebook.github.io/react-native/docs/style</a> and <a href="https://facebook.github.io/react-native/docs/stylesheet">https://facebook.github.io/react-native/docs/stylesheet</a>. Like React Native and other css in js frameworks, styles are written directly in a components javascript file. This makes it very easy for a developer to find and update styles. Unlike css, component styles are local in scope, which avoids traditional css conflicts.</p>
+<p>Styles are written in plain javascript and created using StyleSheet.create(). StyleSheet.create will accept either a style object, or an array of style objects and / or style object arrays. The example below shows the basic styling of a View and Text component.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ExampleScreen</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.view}</span> &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Text</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{[styles.text,styles.textLarge]}</span>&gt;</span>Example Text!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+  );
+};
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">view</span>: {
+    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;#EEEEEE&#x27;</span>,
+  },
+  <span class="hljs-attr">text</span>: {
+    <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#000000&#x27;</span>,
+    <span class="hljs-attr">fontSize</span>: <span class="hljs-number">16</span>
+  },
+  <span class="hljs-attr">textLarge</span>: {
+    <span class="hljs-attr">fontSize</span>: <span class="hljs-number">24</span>
+  }
+});
+</code></pre>
+<h3 id="stylesheet-utilities">StyleSheet Utilities</h3>
+<p>StylesSheet provides the the react native properties <strong>hairlineWidth</strong> and <strong>absoluteFill</strong>, as well as the method <strong>color()</strong>.</p>
+<pre><code class="language-js"><span class="hljs-keyword">static</span> <span class="hljs-title function_">color</span>(htmlHex)
+</code></pre>
+<p>The Color method creates a color object that can modify the color and convert it into another StyleSheet compatible color. At this time only the <strong>rgba(opacity)</strong> is available. It will output the rgba value of the color.</p>
+<pre><code class="language-js"><span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">color</span>(<span class="hljs-string">&#x27;#EFEFEF&#x27;</span>).<span class="hljs-title function_">rgba</span>(<span class="hljs-number">.5</span>)
+</code></pre>
+<h3 id="dynamic-styling">Dynamic Styling</h3>
+<p>In many cases, styles can become much more complicated than using just a single static StyleSheet. Some common patterns for dynamically styling components are passing down styles through props and dynamically setting values before rendering a component.</p>
+<h5 id="cascading-styles-with-props">Cascading styles with props</h5>
+<p>StyleSheet styles can be passed down in props to effectively cascade styles (see this.props.style and this.props.containerStyle below). Props can also be used to dynamically add styles (see this.props.large below).</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TitleText</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{this.props.containerStyle}</span> &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{[styles.titleText,</span> <span class="hljs-attr">this.props.style</span>, <span class="hljs-attr">this.props.large</span> &amp;&amp; <span class="hljs-attr">styles.titleTextLarge</span>]}&gt;</span>Example Text!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+}
+
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">titleText</span>: {
+    <span class="hljs-attr">fontSize</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">fontWeight</span>: <span class="hljs-string">&#x27;700&#x27;</span>
+  },
+  <span class="hljs-attr">titleTextLarge</span>: {
+    <span class="hljs-attr">fontSize</span>: <span class="hljs-number">24</span>
+  }
+});
+</code></pre>
+<h5 id="styling-at-render">Styling at render</h5>
+<p>Dynamically creating styles is very powerful, and is used extensively on core components and in web animations. Just be careful that a stylesheet isn't being initialized excessively, because this may lead to issues. Also keep in mind that it may be easier to for developers to read static StyleSheets defined under a component.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TitleText</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> dynamicStyles = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">createStyles</span>();
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.containerStyle}</span> &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{dynamicStyles.titleText}</span>&gt;</span>Example Text!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+  <span class="hljs-title function_">createStyles</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+      <span class="hljs-attr">titleText</span>: {
+        <span class="hljs-attr">fontSize</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">fontSize</span> || <span class="hljs-number">20</span>,
+        <span class="hljs-attr">fontWeight</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">fontWeight</span> || <span class="hljs-string">&#x27;700&#x27;</span>,
+        <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;#000000&#x27;</span>
+      }
+    });
+  }
+}
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">containerStyle</span>: {
+    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;#EEEEEE&#x27;</span>
+  }
+});
+</code></pre>
+<h3 id="responsive-styling">Responsive Styling</h3>
+<p>To be able to accommodate many different devices, platforms, and screen sizes, the R14 App uses several different tools and methods to accomplish responsive design. Fluid responsive design patterns allow a developer to essentially create a one size fits all app, which is much easier to maintain and update.</p>
+<h4 id="stylesheet-style-screensize-callback">StyleSheet style screen(size) callback</h4>
+<p>Similar to css media queries, the StyleSheet object uses a style callback named screen. The first parameter is an object containing the current height and width of the screen. The screen callback will be called on resizes and it's values are observed by the ui state. In the example below, the view's background will change colors if the screen height or width is less than 640.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R1</span> <span class="hljs-number">4</span>, {
+  <span class="hljs-title class_">StyleSheet</span>
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">ResponsiveView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> (
+          <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.view}</span> &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Responsive View!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+      );
+    }
+  }
+);
+
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">view</span>: {
+    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;#EEEEEE&#x27;</span>,
+    <span class="hljs-attr">screen</span>: <span class="hljs-function">(<span class="hljs-params">{height, width}</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span>(height &lt; <span class="hljs-number">640</span> || width &lt; <span class="hljs-number">640</span>) <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;#CECECE&#x27;</span>
+      }
+    }
+  }
+});
+</code></pre>
+<h4 id="dimensions">Dimensions</h4>
+<p>Another way of dynamically manipulating screen dimensions is by using the core Dimensions class. If you are not familiar with Dimensions in React Native, which this is based on, read more at <a href="https://facebook.github.io/react-native/docs/dimensions">https://facebook.github.io/react-native/docs/dimensions</a>. Along with other core components, StyleSheet uses Dimensions.addEventListener('change') to listen for changes and trigger screen size callbacks.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">StyleSheet</span>,
+  <span class="hljs-title class_">Dimensions</span>,
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ResponsiveView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> dynamicStyles = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">createStyles</span>();
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.container}</span> &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Responsive View!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+  <span class="hljs-title function_">createStyles</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">let</span> {height, width} = <span class="hljs-title class_">Dimensions</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;window&quot;</span>);
+    <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+      <span class="hljs-attr">container</span>: {
+        <span class="hljs-attr">height</span>: height,
+        <span class="hljs-attr">width</span>: width / <span class="hljs-number">2</span>,
+      }
+    });
+  }
+}
+</code></pre>
+<h4 id="view-onlayout-prop">View OnLayout prop</h4>
+<p>The core View components onLayout prop provides a method to style based on the views size. For more information about the React Native version of View, and it's onLayout prop, please look at <a href="https://facebook.github.io/react-native/docs/view#onlayout">https://facebook.github.io/react-native/docs/view#onlayout</a>. In the example below, onLayout updates the view's style based on its size.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">StyleSheet</span>,
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Text</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ResponsiveView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>){
+    <span class="hljs-variable language_">super</span>(props);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleLayout</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleLayout</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = {
+      <span class="hljs-attr">layout</span>: {
+        <span class="hljs-attr">height</span>: <span class="hljs-literal">null</span>, 
+        <span class="hljs-attr">width</span>: <span class="hljs-literal">null</span>
+      }
+    };
+  }
+  <span class="hljs-title function_">handleLayout</span>(<span class="hljs-params">event</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>({
+      <span class="hljs-attr">layout</span>: {
+        <span class="hljs-attr">height</span>: event.<span class="hljs-property">nativeEvent</span>.<span class="hljs-property">layout</span>.<span class="hljs-property">height</span>,
+        <span class="hljs-attr">width</span>: event.<span class="hljs-property">nativeEvent</span>.<span class="hljs-property">layout</span>.<span class="hljs-property">width</span>
+      }
+    });
+  }
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">let</span> dynamicStyles = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">createStyles</span>();
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span> 
+        <span class="hljs-attr">onLayout</span>=<span class="hljs-string">{this.handleLayout}</span>
+        <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.container}</span> 
+      &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>Responsive View!<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+  <span class="hljs-title function_">createStyles</span>(<span class="hljs-params"></span>){
+    <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+      <span class="hljs-attr">container</span>: {
+        <span class="hljs-attr">height</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">layout</span>.<span class="hljs-property">height</span>,
+        <span class="hljs-attr">width</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">layout</span>.<span class="hljs-property">height</span> / <span class="hljs-number">2</span>,
+      }
+    });
+  }
+}
+</code></pre>
+<h3 id="sizing-and-flex">Sizing and Flex</h3>
+<p>The R14 App uses flex layout based on React Native. Flex layout greatly simplifies layout styling and alignment. For more information please read <a href="https://facebook.github.io/react-native/docs/flexbox">https://facebook.github.io/react-native/docs/flexbox</a>.</p>
+<h2 id="animations">Animations</h2>
+<p>Animations are a really important tool used to create a great user experience. The R14 App includes two main core animation components to create smooth natively accelerated animations and transitions, AnimatedView and AnimatedText. On native, these components are built using the amazing Animated library <a href="https://facebook.github.io/react-native/docs/animated">https://facebook.github.io/react-native/docs/animated</a>, and use the native drivers by default. For the web components, animations are dynamically generated into pure  CSS animations <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations</a>. This result is extremely performant and smooth animations. Please note, the native driver only supports the use of non-layout properties like opacity and transforms <a href="https://facebook.github.io/react-native/docs/animations#caveats">https://facebook.github.io/react-native/docs/animations#caveats</a>. If you need to animate other properties, set useNativeDriver={false}, however it may effect the quality of animations.</p>
+<p>In the future we are planning on adding more complex transitions as well as percentage based keyframe animations. But, in almost all cases simple animations and transitions are more than enough.</p>
+<p>The below example demonstrates a simple text animation. The text will continuously fade in and out, unless the iterationCount prop is supplied.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">AnimatedText</span>,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">FadingText</span>(<span class="hljs-params">{ iterationCount }</span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">AnimatedText</span>
+      <span class="hljs-attr">to</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">opacity:</span> <span class="hljs-attr">1</span>
+      }}
+      <span class="hljs-attr">from</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">opacity:</span> <span class="hljs-attr">.2</span>
+      }}
+      <span class="hljs-attr">duration</span>=<span class="hljs-string">{250}</span>
+      <span class="hljs-attr">iterationCount</span>=<span class="hljs-string">{iterationCount</span> || &quot;<span class="hljs-attr">infinite</span>&quot;}
+    &gt;</span>
+      Fading Text!
+    <span class="hljs-tag">&lt;/<span class="hljs-name">AnimatedText</span>&gt;</span></span>
+  );
+}
+
+</code></pre>
+<h3 id="transitions">Transitions</h3>
+<p>Many UX use cases call for transitions, rather than simple linear animations. Transition allow the developer to animate the entering and exiting of components based on a boolean state (the <strong>in</strong> prop). For example, the animated opening and closing of a dropdown menu.</p>
+<p>Transitions have a few important extra properties. The <strong>unmountOnExit</strong> prop will remove the component after the exit transition completes. The <strong>animateOnMount</strong> prop will run the initial animation on it's first mount, otherwise the enter or exit animation style will be applied before mount.</p>
+<p>In the example component below, an image will animate in and out when the button is pressed.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">View</span>,
+  <span class="hljs-title class_">AnimatedView</span>,
+  <span class="hljs-title class_">Image</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ImageToggle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>){
+    <span class="hljs-variable language_">super</span>(props);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleTogglePress</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleTogglePress</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = {
+      <span class="hljs-attr">show</span>: <span class="hljs-literal">false</span>
+    };
+  }
+  <span class="hljs-title function_">handleTogglePress</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>({
+      <span class="hljs-attr">show</span>: !(<span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">show</span>)
+    });
+  }
+  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Toggle Image&#x27;</span>
+          <span class="hljs-attr">onPress</span>=<span class="hljs-string">{this.handleTogglePress}</span>
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AnimatedView</span>
+          <span class="hljs-attr">in</span>=<span class="hljs-string">{this.state.show}</span>
+          <span class="hljs-attr">enter</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">opacity:</span> <span class="hljs-attr">1</span>,
+             <span class="hljs-attr">transform:</span> [
+              { <span class="hljs-attr">scale:</span> <span class="hljs-attr">1</span> },
+              { <span class="hljs-attr">translateY:</span> <span class="hljs-attr">0</span> }
+            ]
+          }}
+          <span class="hljs-attr">exit</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">opacity:</span> <span class="hljs-attr">.1</span>,
+            <span class="hljs-attr">transform:</span> [
+              { <span class="hljs-attr">scale:</span> <span class="hljs-attr">.5</span> },
+              { <span class="hljs-attr">translateY:</span> <span class="hljs-attr">-24</span> }
+            ]
+          }}
+          <span class="hljs-attr">duration</span>=<span class="hljs-string">{250}</span>
+          <span class="hljs-attr">animateOnMount</span>
+          <span class="hljs-attr">unmountOnExit</span>
+        &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> 
+            <span class="hljs-attr">style</span>=<span class="hljs-string">{{width:</span> <span class="hljs-attr">50</span>, <span class="hljs-attr">height:</span> <span class="hljs-attr">50</span>}}
+            <span class="hljs-attr">source</span>=<span class="hljs-string">{this.props.imageSource}</span> 
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">AnimatedView</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+}
+</code></pre>
+<h2 id="themes">Themes</h2>
+<p>The R14 App includes a theme provider system to make it easy to create and maintain consistent themes across all core components, with very little styling. To access the theme provider simply import Theme or Colors from './core' (Colors is equivalent to Theme.colors). The theme provider system is managed by the UI domain (R14.app.ui.theme) so it can also be called from the app context.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {
+  <span class="hljs-title class_">Theme</span>,
+  <span class="hljs-title class_">Colors</span>,
+  <span class="hljs-title class_">View</span>, 
+  <span class="hljs-title class_">Button</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleScreen</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>){
+      <span class="hljs-variable language_">super</span>(props);
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handlePress</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handlePress</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);
+    }
+    <span class="hljs-keyword">async</span> <span class="hljs-title function_">handlePress</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">let</span> theme = 
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">ui</span>.<span class="hljs-property">theme</span>.<span class="hljs-property">colorScheme</span> === <span class="hljs-string">&#x27;default&#x27;</span> 
+        ? <span class="hljs-string">&#x27;light&#x27;</span> 
+        : <span class="hljs-string">&#x27;default&#x27;</span>;
+      <span class="hljs-comment">// Or using the imported Theme instance</span>
+      <span class="hljs-title class_">Theme</span>.<span class="hljs-title function_">setColorScheme</span>(theme);
+    }
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> (
+          <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>
+            <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.view}</span>
+          &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+              <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Toggle Theme&#x27;</span>
+              <span class="hljs-attr">onPress</span>=<span class="hljs-string">{this.handlePress}</span>
+              <span class="hljs-attr">color</span>=<span class="hljs-string">{this.props.app.ui.theme.colors.primary}</span>
+            /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+      );
+    }
+  }
+);
+<span class="hljs-comment">// Below both Colors and Theme are used for example purposes. Most of the time only Colors is needed when styling.</span>
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">view</span>: {
+    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-title class_">Colors</span>.<span class="hljs-property">secondary</span>,
+    <span class="hljs-attr">borderColor</span>: <span class="hljs-title class_">Theme</span>.<span class="hljs-property">colors</span>.<span class="hljs-property">secondaryDark</span>
+  }
+});
+</code></pre>
+<h4 id="theme-config">Theme Config</h4>
+<p>The theme config file defines the different color and component themes for an app. It will be automatically included when the R14 app is initialized. It should be named 'themes.config.js' in the '/config/ folder and export a single default object containing 'colors' and 'components'. The colors config must have at least one color scheme. The color key for each theme correspond to the color scheme concepts used by in the material design color system, for more information please read <a href="https://material.io/design/color">https://material.io/design/color</a>. Component themes for an app is currently is development.</p>
+<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">colors</span>: {
+    <span class="hljs-attr">default</span>: {
+      <span class="hljs-attr">primary</span>: <span class="hljs-string">&quot;#0097a7&quot;</span>,
+      <span class="hljs-attr">onPrimary</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">primaryLight</span>: <span class="hljs-string">&quot;#56c8d8&quot;</span>,
+      <span class="hljs-attr">onPrimaryLight</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">primaryDark</span>: <span class="hljs-string">&quot;#006978&quot;</span>,
+      <span class="hljs-attr">onPrimaryDark</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">secondary</span>: <span class="hljs-string">&quot;#c62828&quot;</span>,
+      <span class="hljs-attr">onSecondary</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">secondaryLight</span>: <span class="hljs-string">&quot;#ff5f52&quot;</span>,
+      <span class="hljs-attr">onSecondaryLight</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">secondaryDark</span>: <span class="hljs-string">&quot;#8e0000&quot;</span>,
+      <span class="hljs-attr">onSecondaryDark</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">background</span>: <span class="hljs-string">&quot;#1b1b1b&quot;</span>,
+      <span class="hljs-attr">onBackground</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">surface</span>: <span class="hljs-string">&quot;#212121&quot;</span>,
+      <span class="hljs-attr">onSurface</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>,
+      <span class="hljs-attr">error</span>: <span class="hljs-string">&quot;#B00020&quot;</span>,
+      <span class="hljs-attr">onError</span>: <span class="hljs-string">&quot;#FFFFFF&quot;</span>
+    },
+    <span class="hljs-attr">light</span>: {
+      ...lightColors
+    }
+  }
+}
+</code></pre>
+<h3 id="fonts">Fonts</h3>
+<p>TODO Needs Content</p>
+<h3 id="icons">Icons</h3>
+<p>TODO Needs Content</p>
+<h2 id="app-state">App State</h2>
+<p>In modern applications reactive state management is both powerful and important. In React, each component has its own state, and the component is rendered when the state is updated. But what if, for example, you need to update the header, slide-out menu, and other components after a successful login?  This is where application level state management becomes very powerful. The user logs in, the app updates 'loggedIn' state to true, and any components which observe the 'loggedIn' state are automatically re-rendered. There are several different libraries and patterns designed to deal with state management, such as Redux, MobX, React Context API, and React Hooks.</p>
+<p>The R14 React app uses a reactive state management system built on top of MobX, but abstracted to use many of the straight forward concepts introduced by Reacts component state. Any connected component (wrapped with R14.connect() for class components or the withAppObserver hook for functional components) can observe changes to the app's state by referencing app state context variables in the context of it's render method. To keep things organized, maintainable, and scalable the app state is organized into logical domains.</p>
+<h3 id="domains">Domains</h3>
+<p>Domains are a very important concept in an R14 React App. They help organize the business and ui model code, as well as manage the reactive app state. Domains are split into two different root subsets, UI and business. The UI domains manage parts of the ui (for example the header, data tables, forms) and the business domains manage business logic (for example users, shopping cart, todo list items). For example, let's say we are building a Todo List. We may want a business domain 'todo' which deals with all code related to the Todo Lists, and a ui domains 'header' which updates based on search, login, etc... Business domains can be accessed from app context with 'app.{dm or domain}.{domainKey}'. For ui: 'app.ui.{domainKey}'.</p>
+<p>Just like React components, R14 domains are stateful. In fact, domain state works exactly like React component state: state is initialized in the constructor, updated using setState, and observed during component rendering. Let's look at a simple example:</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleDomain</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">R14.Domain</span>{
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">super</span>();
+    <span class="hljs-comment">// Init the state just as you would in React</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = {
+      <span class="hljs-attr">loaded</span>: <span class="hljs-literal">false</span>
+    }
+  }
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">isLoaded</span>(){
+    <span class="hljs-comment">// isLoaded will be observed as this.state.loaded in a component</span>
+    <span class="hljs-comment">// Just be careful to not make domain state confusing in the component</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">loaded</span>;
+  }
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">load</span>(<span class="hljs-params"></span>){
+    <span class="hljs-comment">// Wait for the someAsyncFn to load something</span>
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">someAsyncFn</span>();
+    <span class="hljs-comment">// Set domain state to loaded</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>({
+      <span class="hljs-attr">loaded</span>: <span class="hljs-literal">true</span>
+    });
+  }
+}
+</code></pre>
+<p>In the screen class component below, R14.connect() inserts the R14 app context into props.app and defines the component as a domain state observer. Like React component state, the component will update any domain state variables that are referenced during render.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExampleScreen</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>){
+      <span class="hljs-variable language_">super</span>(props);
+      <span class="hljs-comment">// Call the load method of the example domain.</span>
+      <span class="hljs-comment">// Since the domain is detached from the component we don&#x27;t need to wait for componentDidMount.</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">dm</span>.<span class="hljs-property">example</span>.<span class="hljs-title function_">load</span>();
+      <span class="hljs-comment">// Or to make code easier to read</span>
+      <span class="hljs-comment">// this.exampleDm = this.props.app.dm.example;</span>
+      <span class="hljs-comment">// this.exampleDm.load();</span>
+    }
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>){
+      <span class="hljs-comment">// this.exampleDm.isLoaded could also be used below, with the same results.</span>
+      <span class="hljs-keyword">return</span>(
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>
+            {this.props.app.dm.example.state.loaded 
+              ? &#x27;Load Complete!!!&#x27; 
+              : &#x27;Loading...&#x27;}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+      );
+    }
+  }
+);
+</code></pre>
+<p>In the functional component bellow, withAppObserver() defines the component as a domain state observer. <strong>Please note</strong> that R14.connect can't be used with functional components</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">withAppObserver</span>(
+  <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> exampleDomain = <span class="hljs-title function_">useDomain</span>(<span class="hljs-string">&quot;example&quot;</span>);
+    <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">()=&gt;</span>exampleDomain.<span class="hljs-title function_">load</span>(), []);
+    <span class="hljs-keyword">return</span>(
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Text</span>&gt;</span>
+          {exampleDomain.state.loaded 
+            ? &#x27;Load Complete!!!&#x27; 
+            : &#x27;Loading...&#x27;}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
+  }
+);
+</code></pre>
+<h2 id="core-components">Core Components</h2>
+<p>Core components are the primary building blocks to be used when developing the UI. The following is documentation for several of the commonly used core components.</p>
+<h3 id="forms">Forms</h3>
+<p>The R14 App provide the developer with a consistent and declarative way to build interactive user input forms. Forms generally consist of a form component, fields, and a submit control. Fields wrapped inside the form are controlled components, and the forms state is managed by the UI domain.</p>
+<p>The example below shows a basic login screen, using a form component and the local handleSubmit method to process and redirect the form submission. Even without looking at the component api, the declarative nature of React makes it easy to intuitively understand how the components work.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {
+  <span class="hljs-title class_">Redirect</span>,
+  <span class="hljs-title class_">Form</span>,
+  <span class="hljs-title class_">SubmitButton</span>,
+  <span class="hljs-title class_">TextInputField</span>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../core&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-variable constant_">R14</span>.<span class="hljs-title function_">connect</span>(
+  <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoginScreen</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) {
+      <span class="hljs-variable language_">super</span>(props);
+      <span class="hljs-comment">// Bind the handleSubmit method so it keeps it&#x27;s context.</span>
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleSubmit</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">handleSubmit</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>);
+    }
+    <span class="hljs-keyword">async</span> <span class="hljs-title function_">handleSubmit</span>(<span class="hljs-params">loginForm</span>) {
+      <span class="hljs-comment">// Wait for the someAsyncFn to complete.</span>
+      <span class="hljs-keyword">let</span> success = <span class="hljs-keyword">await</span> <span class="hljs-title function_">someAsyncFn</span>(loginForm);
+      <span class="hljs-comment">// If success, return a redirect to the profile action</span>
+      <span class="hljs-keyword">if</span> (success) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#x27;profile&#x27;</span> /&gt;</span></span>;
+    }
+    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> (
+          <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Form</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;loginForm&#x27;</span>
+            <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Login&#x27;</span>
+            <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{this.handleSubmit}</span>
+            <span class="hljs-attr">validateBeforeSubmit</span>
+          &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">TextInputField</span>
+              <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;username&#x27;</span>
+              <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;Username&#x27;</span>
+              <span class="hljs-attr">icon</span>=<span class="hljs-string">&#x27;account&#x27;</span>
+              <span class="hljs-attr">required</span>=<span class="hljs-string">&#x27;Enter Username&#x27;</span>
+            /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">TextInputField</span>
+              <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;password&#x27;</span>
+              <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;Password&#x27;</span>
+              <span class="hljs-attr">icon</span>=<span class="hljs-string">&#x27;lock&#x27;</span>
+              <span class="hljs-attr">secure</span>
+              <span class="hljs-attr">required</span>=<span class="hljs-string">&#x27;Enter Password&#x27;</span>
+            /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">SubmitButton</span>
+              <span class="hljs-attr">title</span>=<span class="hljs-string">&#x27;Continue&#x27;</span>
+            /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Form</span>&gt;</span></span>
+      );
+    }
+  }
+);
+</code></pre>
+<h4 id="form-ui-domain">Form UI Domain</h4>
+<p>The R14 App controls forms and form state in the UI domain (form or fm). This allows developers to quickly develop highly interactive forms, while the ui domain does most of the heavy lifting. This also makes it easy to programmatically read and update forms from anywhere in the app, not just it's parent component. In the example above, the loginForm object passed to handleSubmit is an instance of the ui form domain. It is bound directly to the form and form fields component state, and can be used to validate, iterate fields, update field options, and more.</p>
+<p>Let's take a look at a simple example of iterating through form fields and setting an error message on a field. This could be easily done using a custom validator, but for the purpose of this example let's validate it from inside the loginScreen component.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">async</span> <span class="hljs-title function_">handleSubmit</span>(<span class="hljs-params">loginForm</span>) {
+  <span class="hljs-comment">// Manually validate a form.</span>
+  <span class="hljs-comment">// If the form is not valid, isValid will automatically update the field errors messages.</span>
+  <span class="hljs-comment">// Please note, in the example above the Form prop validateBeforeSubmit will validate the form before calling onSubmit, so loginForm.validate() would always return true.</span>
+  <span class="hljs-keyword">if</span>(! <span class="hljs-keyword">await</span> loginForm.<span class="hljs-title function_">isValid</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+
+  <span class="hljs-keyword">let</span> success = <span class="hljs-literal">true</span>;
+  <span class="hljs-comment">// Iterate through the elements, and update any invalid elements.</span>
+  <span class="hljs-comment">// The form ui state will automatically batch state updates until the action is complete.</span>
+  loginForm.<span class="hljs-property">elmts</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">element</span>)=&gt;</span>{
+    <span class="hljs-keyword">if</span>(element.<span class="hljs-property">value</span> === <span class="hljs-string">&#x27;admin&#x27;</span>){
+      <span class="hljs-comment">// Set the error message to be displayed under the form field</span>
+      element.<span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;Sorry, admin is a reserved word&#x27;</span>);
+      <span class="hljs-comment">// Focus the first error element</span>
+      success &amp;&amp; element.<span class="hljs-title function_">setFocus</span>(<span class="hljs-literal">true</span>); 
+      success = <span class="hljs-literal">false</span>;
+    }
+  });
+  <span class="hljs-comment">// If valid, redirect to profile, otherwise return false.</span>
+  <span class="hljs-keyword">return</span> success ? <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Redirect</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&#x27;profile&#x27;</span> /&gt;</span></span> : <span class="hljs-literal">false</span>;
+}
+
+</code></pre>
+<p>In some cases a form domain instance may need to be accessed from outside the form component context. Any active form can be manipulated through the app ui domain context. The form component will observe any changes made.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">async</span> <span class="hljs-title function_">updateExternalForm</span>(<span class="hljs-params"></span>){
+  <span class="hljs-comment">// The form instances are available in the ui domain with keys form or fm.</span>
+  <span class="hljs-keyword">let</span> loginForm = <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">app</span>.<span class="hljs-property">ui</span>.<span class="hljs-title function_">fm</span>(<span class="hljs-string">&#x27;loginForm&#x27;</span>);
+  <span class="hljs-comment">// Log the name of each element</span>
+  loginForm.<span class="hljs-property">elmts</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">element</span>)=&gt;</span>{
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Form Element: <span class="hljs-subst">${element.name}</span>`</span>,element.<span class="hljs-property">value</span>);
+  });
+  <span class="hljs-comment">// Reset the form </span>
+  loginForm.<span class="hljs-title function_">reset</span>();
+}
+</code></pre>
+<h3 id="datatable">DataTable</h3>
+<p>The R14 App proves a feature-rich DataTable component for displaying and search paginated data.</p>
+<p>The example below shows a DataTable to view / edit users.</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-variable constant_">R14</span>, {
+  useDomain,
+  useNav,
+  <span class="hljs-title class_">Colors</span>,
+  <span class="hljs-title class_">StyleSheet</span>,
+  <span class="hljs-title class_">PopUpMenu</span>,
+  <span class="hljs-title class_">PopUpMenuItem</span>,
+  <span class="hljs-title class_">IconButton</span>,
+  <span class="hljs-title class_">Text</span>,
+  <span class="hljs-title class_">DataTable</span>,
+  <span class="hljs-title class_">Chip</span>,
+  <span class="hljs-title class_">ChipGroup</span>,
+  <span class="hljs-title class_">Image</span>,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../core&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">UserDataTable</span>(<span class="hljs-params">{ title }</span>) {
+  <span class="hljs-keyword">const</span> userDomain = <span class="hljs-title function_">useDomain</span>(<span class="hljs-string">&quot;user&quot;</span>);
+  <span class="hljs-keyword">const</span> nav = <span class="hljs-title function_">useNav</span>();
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">getPageData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">
+    { page, rowsPerPage, sortColumnName, sortDirection, search = <span class="hljs-literal">null</span> },
+    options = {}
+  </span>) =&gt; {
+    <span class="hljs-keyword">let</span> filter = search ? { <span class="hljs-attr">like</span>: <span class="hljs-string">`%<span class="hljs-subst">${search}</span>%`</span> } : {};
+    <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> userDomain.<span class="hljs-title function_">find</span>(
+      <span class="hljs-string">`
+          uid
+          name
+          email
+        `</span>,
+      {
+        page,
+        rowsPerPage,
+        filter,
+        <span class="hljs-attr">sort</span>: [
+          {
+            <span class="hljs-attr">field</span>: sortColumnName,
+            <span class="hljs-attr">order</span>: sortDirection.<span class="hljs-title function_">toUpperCase</span>(),
+          },
+        ],
+        <span class="hljs-attr">totalCount</span>: options.<span class="hljs-property">totalCount</span> || <span class="hljs-literal">false</span>,
+      }
+    );
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">pageData</span>: res.<span class="hljs-property">nodes</span>,
+      <span class="hljs-attr">totalRows</span>: res.<span class="hljs-property">totalCount</span> || <span class="hljs-literal">null</span>,
+    };
+  };
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">initializer</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">gridState</span>) =&gt;
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">getPageData</span>(gridState, {
+      <span class="hljs-attr">totalCount</span>: <span class="hljs-literal">true</span>,
+    });
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">pageLoader</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">gridState</span>) =&gt; {
+    <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getPageData</span>(gridState);
+    <span class="hljs-keyword">return</span> res.<span class="hljs-property">pageData</span>;
+  };
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">cellRenderer</span> = (<span class="hljs-params">{ cell, columnName, row, columns }</span>) =&gt; {
+    <span class="hljs-keyword">let</span> content = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">let</span> style = [styles.<span class="hljs-property">cellText</span>];
+    <span class="hljs-keyword">switch</span> (columnName) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;profileImage&quot;</span>:
+        content =
+          cell &amp;&amp; cell.<span class="hljs-property">key</span> ? (
+            <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Image</span>
+              <span class="hljs-attr">resizeMode</span>=<span class="hljs-string">&#x27;cover&#x27;</span>
+              <span class="hljs-attr">height</span>=<span class="hljs-string">{50}</span>
+              <span class="hljs-attr">width</span>=<span class="hljs-string">{50}</span>
+              <span class="hljs-attr">source</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">key:</span> <span class="hljs-attr">cell.key</span> }}
+            /&gt;</span></span>
+          ) : <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-attr">default</span>:
+        content = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Text</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{style}</span>&gt;</span>{cell}<span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span>;
+    }
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
+        {content}
+        {columns.email.collapsed &amp;&amp; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">ChipGroup</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{styles.cellChipGroup}</span>&gt;</span>
+            {columns.email.collapsed &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">Chip</span> <span class="hljs-attr">label</span>=<span class="hljs-string">{row.email}</span> /&gt;</span>}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">ChipGroup</span>&gt;</span>
+        )}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span></span>
+    );
+  };
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">DataTable</span>
+      <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;users&#x27;</span>
+      <span class="hljs-attr">columns</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">profileImage:</span> {
+          <span class="hljs-attr">label:</span> &quot;<span class="hljs-attr">image</span>&quot;,
+        },
+        <span class="hljs-attr">name:</span> {
+          <span class="hljs-attr">label:</span> &quot;<span class="hljs-attr">Name</span>&quot;,
+          <span class="hljs-attr">sortable:</span> <span class="hljs-attr">true</span>,
+        },
+        <span class="hljs-attr">email:</span> {
+          <span class="hljs-attr">label:</span> &quot;<span class="hljs-attr">Email</span>&quot;,
+          <span class="hljs-attr">sortable:</span> <span class="hljs-attr">true</span>,
+          <span class="hljs-attr">collapse:</span> ({ <span class="hljs-attr">width</span> }) =&gt;</span> {
+            return width &lt;= 640;
+          },
+        },
+      }}
+      searchable
+      initializer={initializer}
+      rowKeyExtractor={(row) =&gt; {
+        return row.uid;
+      }}
+      pageLoader={pageLoader}
+      cellRenderer={cellRenderer}
+      initialRowsPerPage={10}
+      headerTitle={title || &quot;Users&quot;}
+      paddingBottom={72} // Make space for the FAB
+      initialSortColumnName=&#x27;type&#x27;
+      initialSortDirection=&#x27;asc&#x27;
+      headerControlsRight={[
+        <span class="hljs-tag">&lt;<span class="hljs-name">PopUpMenu</span>
+          <span class="hljs-attr">controlIcon</span>=<span class="hljs-string">&#x27;dotsVertical&#x27;</span>
+          <span class="hljs-attr">key</span>=<span class="hljs-string">&#x27;adminMenu&#x27;</span>
+          <span class="hljs-attr">direction</span>=<span class="hljs-string">&#x27;downLeft&#x27;</span>
+        &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">PopUpMenuItem</span>
+            <span class="hljs-attr">icon</span>=<span class="hljs-string">&#x27;add&#x27;</span>
+            <span class="hljs-attr">iconSize</span>=<span class="hljs-string">&#x27;small&#x27;</span>
+            <span class="hljs-attr">label</span>=<span class="hljs-string">&#x27;Add User&#x27;</span>
+            <span class="hljs-attr">to</span>=<span class="hljs-string">&#x27;userAdd&#x27;</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">&#x27;add&#x27;</span>
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">PopUpMenu</span>&gt;</span>,
+      ]}
+      rowControlsRight={(row, dataTable) =&gt; {
+        return [
+          <span class="hljs-tag">&lt;<span class="hljs-name">IconButton</span>
+            <span class="hljs-attr">icon</span>=<span class="hljs-string">&#x27;edit&#x27;</span>
+            <span class="hljs-attr">size</span>=<span class="hljs-string">&#x27;small&#x27;</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">&#x27;edit&#x27;</span>
+            <span class="hljs-attr">onPress</span>=<span class="hljs-string">{()</span> =&gt;</span>
+              nav.to(&quot;userEdit&quot;, {
+                uid: row.uid,
+              })
+            }
+          /&gt;,
+        ];
+      }}
+    /&gt;</span>
+  );
+}
+<span class="hljs-keyword">const</span> styles = <span class="hljs-title class_">StyleSheet</span>.<span class="hljs-title function_">create</span>({
+  <span class="hljs-attr">cellText</span>: {
+    <span class="hljs-attr">color</span>: <span class="hljs-title class_">Colors</span>.<span class="hljs-property">onSurface</span>,
+  },
+  <span class="hljs-attr">cellChipGroup</span>: {
+    <span class="hljs-attr">marginTop</span>: <span class="hljs-number">8</span>,
+  },
+});
+
+</code></pre>
+<h2 id="api--graphql">API / GraphQL</h2>
+<p>The R14 App includes built in support to communicate with any kind of api service. The api base path is configured in config.js and the api connector is available in the app context 'app.api', and includes basic methods like fetch, post, and submit (a form submission abstraction). While the api can be used to make Rest, RPC, and SOAP requests, it was built with GraphQL / R14-server as the primary use case. If you are not familiar with GraphQL, please take a look at <a href="https://graphql.org/">https://graphql.org/</a>.</p>
+<p>GraphQL allows the developer to request and update only the data they need, at the same time using strict type validation. It also makes it possible to query complex and dynamic data sets from the GraphQL server without needing to create extra backend endpoints, saving time on development and backend change requests. In GraphQL there are 2 main request types, mutations and queries. Mutations are any request that causes an insert, update, or delete on the api data source. Queries fetch data. Mutations and queries use nearly identical syntax, but the separation of usage helps developers organize API concerns by function, creating more maintainable and upgradable code.</p>
+<p>For access to the app specific api documentation, R14-server uses a web based GraphQL API explorer called GraphiQL. A link and credentials for the GraphiQL development instance associated with a R14 App should be provided by the back-end development team.</p>
+<p>The R14 api connector has two main methods, query (qry) and mutate (mut). The first parameter is the GraphQL query string, the second a data object with variable keys to be supplied to the query. The example below demonstrates the basic usage of the api connector making GraphQL requests.</p>
+<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProfileDomain</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">R14.Domain</span> {
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">find</span>(<span class="hljs-params">options = <span class="hljs-literal">null</span></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">api</span>.<span class="hljs-title function_">qry</span>(<span class="hljs-string">`
+      query FindProfiles($page: Int, $resultsPerPage: Int, $totalCount: Boolean!, $sort: [SortOption!]!) {
+        profiles(page: $page, resultsPerPage: $resultsPerPage, sort: $sort){
+          totalCount @include(if: $totalCount)
+          nodes {
+            uid
+            username
+            name
+          }
+        }
+      }`</span>, options
+    );
+  }
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">update</span>(<span class="hljs-params">values</span>) {
+    <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">api</span>.<span class="hljs-title function_">mutate</span>(<span class="hljs-string">`
+      mutation UpdateProfile($input: UpdateProfileInput!) {
+        updateProfile(input: $input){
+          error
+          profile {
+            uid
+            name
+          }
+        }
+      }`</span>, {
+        <span class="hljs-attr">input</span>: values
+      }
+    );
+    <span class="hljs-keyword">if</span>(res.<span class="hljs-property">error</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(res.<span class="hljs-property">error</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> res.<span class="hljs-property">profile</span>;
+  }
+</code></pre>
+
+        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </body>
+    </html>
